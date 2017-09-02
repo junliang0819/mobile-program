@@ -1,7 +1,7 @@
 <template>
   <div style="height: 100px;">
     <mt-swipe :auto="4000">
-      <mt-swipe-item>1</mt-swipe-item>
+      <mt-swipe-item><i style="color: red;font-size: 22px;" class="iconfont icon-ziliaoku"></i></mt-swipe-item>
       <mt-swipe-item>2</mt-swipe-item>
       <mt-swipe-item>3</mt-swipe-item>
     </mt-swipe>
