@@ -1,16 +1,17 @@
 <template>
   <div>
+    <router-view></router-view>
     <mt-tabbar v-model="selected">
       <mt-tab-item id="cash">
-        <img slot="icon" src="../assets/100x100.png">
+        <i class="iconfont icon-rechargefill"></i>
         收银
       </mt-tab-item>
       <mt-tab-item id="state">
-        <img slot="icon" src="../assets/100x100.png">
+        <i class="iconfont icon-danju-xianxing"></i>
         流水
       </mt-tab-item>
       <mt-tab-item id="mine">
-        <img slot="icon" src="../assets/100x100.png">
+        <i class="iconfont icon-my_light"></i>
         我的
       </mt-tab-item>
     </mt-tabbar>
@@ -18,14 +19,20 @@
 </template>
 
 <script>
+
 export default {
   data () {
     return {
-      a: 1
+      selected: 'cash'
     }
   },
   methods: {
 
+  },
+  watch: {
+    selected: function (newValue) {
+      this.$router.push(newValue)
+    }
   }
 
 }
