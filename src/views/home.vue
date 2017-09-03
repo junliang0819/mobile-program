@@ -1,10 +1,19 @@
 <template>
-  <div style="height: 100px;">
-    <mt-swipe :auto="4000">
-      <mt-swipe-item>1</mt-swipe-item>
-      <mt-swipe-item>2</mt-swipe-item>
-      <mt-swipe-item>3</mt-swipe-item>
-    </mt-swipe>
+  <div>
+    <mt-tabbar v-model="selected">
+      <mt-tab-item id="cash">
+        <img slot="icon" src="../assets/100x100.png">
+        收银
+      </mt-tab-item>
+      <mt-tab-item id="state">
+        <img slot="icon" src="../assets/100x100.png">
+        流水
+      </mt-tab-item>
+      <mt-tab-item id="mine">
+        <img slot="icon" src="../assets/100x100.png">
+        我的
+      </mt-tab-item>
+    </mt-tabbar>
   </div>
 </template>
 
