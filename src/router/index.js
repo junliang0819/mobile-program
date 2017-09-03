@@ -6,11 +6,6 @@ import Home from '@/views/home'
 Vue.use(Router)
 
 let routes = [
-  // {
-  //   path: '/',
-  //   name: 'Hello',
-  //   component: Hello
-  // },
   {
     path: '/',
     name: 'home',
