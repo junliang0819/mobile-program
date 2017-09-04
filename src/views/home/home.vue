@@ -1,7 +1,7 @@
 <template>
   <div>
-    <router-view></router-view>
-    <mt-tabbar v-model="selected">
+    <router-view class="mt-bottom"></router-view>
+    <mt-tabbar v-model="selected" class="is-fixed">
       <mt-tab-item id="cash">
         <i class="iconfont icon-rechargefill"></i>
         收银
@@ -37,4 +37,9 @@ export default {
 
 }
 </script>
+<style>
+  .mt-bottom {
+    margin-bottom: 50px;
+  }
+</style>
 
