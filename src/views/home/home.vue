@@ -41,5 +41,11 @@ export default {
   .mt-bottom {
     margin-bottom: 50px;
   }
+  .mint-tab-item-label { 
+    font-size: 16px;
+  }
+  .mint-tab-item {
+    padding: 12px 0;
+  }
 </style>
 

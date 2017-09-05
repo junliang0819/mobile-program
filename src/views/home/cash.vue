@@ -2,17 +2,20 @@
   <div>
     <div class="top">
       <span>
+        <i class="iconfont icon-sweep"></i>
         收款
       </span>
       <span>
+        <i class="iconfont icon-gouwuchefill"></i>
         开单
       </span>
       <span>
+        <i class="iconfont icon-saoyisao"></i>
         扫一扫
       </span>
     </div>
-    <div class="bottom">
-      <span v-for="item in items">
+    <div class="bottom ks-clear">
+      <span v-for="item in items" :class="item.type">
         <i :class="item.icon"></i>
         {{item.name}}
       </span>
@@ -21,14 +24,46 @@
 </template>
 <style scoped>
   .top {
-    background: grey;
-    color: yellow;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: black;
+    color: #dfa900;
     height: 200px;
+    font-size: 16px;
+    opacity: .8;
+  }
+  .top span {
+    text-align: center;
+  }
+  .top i {
+    display: block;
+    font-size: 50px;
   }
   .bottom {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 41px;
+    font-size: 16px;
+    opacity: .8;
+  }
+  .bottom span{
+    float: left;
+    width: 33.33%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .red i {
+    color: #ff4e00;
+  }
+  .green i {
+    color: #dfa900;
+  }
+  .blue i {
+    color: #004adc;
+  }
+  .bottom i {
+    display: block;
+    font-size: 50px;
   }
 </style>
 
@@ -38,48 +73,39 @@ export default {
     return {
       items: [
         {
+          type: 'red',
           icon: 'iconfont icon-goods',
           name: '商品管理'
         },
         {
-          icon: 'iconfont icon-goods',
+          type: 'green',
+          icon: 'iconfont icon-shouru',
           name: '我的收入'
         },
         {
-          icon: 'iconfont icon-goods',
-          name: '消息'
-        },
-        {
-          icon: 'iconfont icon-goods',
-          name: '台卡'
-        },
-        {
-          icon: 'iconfont icon-goods',
+          type: 'blue',
+          icon: 'iconfont icon-my_fill_light',
           name: '顾客'
         },
         {
-          icon: 'iconfont icon-goods',
+          type: 'blue',
+          icon: 'iconfont icon-huiyuanqia',
           name: '会员卡'
         },
         {
-          icon: 'iconfont icon-goods',
+          type: 'green',
+          icon: 'iconfont icon-chuzhiqia',
           name: '储值'
         },
         {
-          icon: 'iconfont icon-goods',
+          type: 'green',
+          icon: 'iconfont icon-youhuijuan',
           name: '优惠券'
         },
         {
-          icon: 'iconfont icon-goods',
+          type: 'blue',
+          icon: 'iconfont icon-laba',
           name: '会员通知'
-        },
-        {
-          icon: 'iconfont icon-goods',
-          name: '会员充值'
-        },
-        {
-          icon: 'iconfont icon-goods',
-          name: '活动'
         }
       ]
     }
