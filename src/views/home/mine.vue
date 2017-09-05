@@ -1,12 +1,16 @@
 <template>
   <div style="background-color: #eeeeee">
+    <div style="height: 10px;background-color: #eeeeee;"></div>
     <div style="margin-bottom: 15px;">
-      <mt-cell is-link>
+      <mt-cell style="padding: 10px 0" is-link>
         <div slot="title">
-          <i class="iconfont icon-dianpu"></i>
-          <span>文子</span>
+          <i class="iconfont icon-kxbshop2 yellow"></i>
+          <div class="inline-block">
+            <span>测试</span>
+            <p class="cert">未认证</p>
+          </div>
         </div>
-        <i class="iconfont icon-dianpu"></i>
+        <i class="iconfont icon-weibiaoti10101"></i>
       </mt-cell>
       <mt-cell title="切换门店" is-link value="测试"></mt-cell>
     </div>
@@ -32,7 +36,7 @@
       </mt-cell>
       <mt-cell is-link>
         <div slot="title">
-          <i class="iconfont icon-jewelry1 yellow"></i>
+          <i class="iconfont icon-creditlevelfilling yellow"></i>
           <span>高级服务</span>
         </div>
       </mt-cell>
@@ -60,7 +64,7 @@
     <div>
       <mt-cell is-link>
         <div slot="title">
-          <i class="iconfont icon-ziliaoku yellow"></i>
+          <i class="iconfont icon-liebiaoshitucaidan yellow"></i>
           <span>收银物料</span>
         </div>
       </mt-cell>
@@ -88,10 +92,27 @@ export default {
 </script>
 <style>
   .yellow {
-    color: #df991f;
+    color: #dfa900;
   }
   .blue {
-    color: #0521dc;
+    color: #004adc;
+  }
+  .icon-kxbshop2 {
+    font-size: 60px;
+    vertical-align: middle;
+  }
+  .inline-block {
+    margin-top: 8px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .cert {
+    font-size: 12px;
+    margin-top: 8px;
+    padding: 2px 6px;
+    border: 1px solid #ff4e00;
+    border-radius: 5px;
+    color: #ff4e00;
   }
 </style>
 
