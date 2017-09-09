@@ -15,7 +15,7 @@
       </span>
     </div>
     <div class="bottom ks-clear">
-      <span v-for="item in items" :class="item.type">
+      <span v-for="item in items" :class="item.type" @click="goto(item.path)">
         <i :class="item.icon"></i>
         {{item.name}}
       </span>
@@ -73,6 +73,7 @@ export default {
     return {
       items: [
         {
+          path: 'goods',
           type: 'red',
           icon: 'iconfont icon-goods',
           name: '商品管理'
@@ -111,7 +112,9 @@ export default {
     }
   },
   methods: {
-
+    goto (path) {
+      this.$router.push(`cash/${path}`)
+    }
   }
 
 }

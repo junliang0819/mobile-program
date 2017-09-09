@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // import Hello from '@/components/Hello'
 import Home from '@/views/home/home'
-import Cash from '@/views/home/cash'
+import Cash from '@/views/home/cash/cash'
+import Goods from '@/views/home/cash/goods'
+
 import State from '@/views/home/state'
 import Mine from '@/views/home/mine'
 
@@ -30,6 +32,11 @@ let routes = [
         component: Mine
       }
     ]
+  },
+  {
+    path: '/cash/goods',
+    name: 'goods',
+    component: Goods
   }
 ]
 
