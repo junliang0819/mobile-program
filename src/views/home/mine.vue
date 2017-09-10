@@ -2,7 +2,7 @@
   <div style="background-color: #eeeeee">
     <div style="height: 10px;background-color: #eeeeee;"></div>
     <div style="margin-bottom: 15px;">
-      <mt-cell style="padding: 10px 0" is-link>
+      <mt-cell style="padding: 10px 0" is-link to="/mine/store">
         <div slot="title">
           <i class="iconfont icon-kxbshop2 yellow"></i>
           <div class="inline-block">
