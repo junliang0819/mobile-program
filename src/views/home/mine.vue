@@ -1,9 +1,8 @@
 <template>
   <div style="background-color: #eeeeee">
-    <div style="height: 10px;background-color: #eeeeee;"></div>
-    <div style="margin-bottom: 15px;">
-      <mt-cell style="padding: 10px 0" is-link to="/mine/store">
-        <div slot="title">
+    <div class="margin-bt15">
+      <mt-cell is-link to="/mine/store">
+        <div slot="title" class="store">
           <i class="iconfont icon-kxbshop2 yellow"></i>
           <div class="inline-block">
             <span>测试</span>
@@ -14,7 +13,7 @@
       </mt-cell>
       <mt-cell title="切换门店" is-link value="测试"></mt-cell>
     </div>
-    <div style="margin-bottom: 15px;">
+    <div class="margin-bt15">
       <mt-cell is-link>
         <div slot="title">
           <i class="iconfont icon-my_fill_light yellow"></i>
@@ -41,7 +40,7 @@
         </div>
       </mt-cell>
     </div>
-    <div style="margin-bottom: 15px;">
+    <div class="margin-bt15">
       <mt-cell is-link>
         <div slot="title">
           <i class="iconfont icon-newshotfill blue"></i>
@@ -79,7 +78,17 @@
 </template>
 
 <script>
+  import 'whatwg-fetch'
+  import Api from '@/api'
   export default {
+    mounted () {
+      fetch('https://suggest.taobao.com/sug?code=utf-8&q=1').then(function (response) {
+        return response.text()
+      }).then(function (body) {
+        document.body.innerHTML = body
+      })
+      Api.get('https://suggest.taobao.com/sug?code=utf-8&q=1')
+    },
     data () {
       return {
       }
@@ -90,6 +99,13 @@
   }
 </script>
 <style scoped>
+  .margin-bt15 {
+    margin-bottom: 15px;
+  }
+  .store {
+    padding: 10px 0;
+    border-top: none;
+  }
   .yellow {
     color: #dfa900;
   }

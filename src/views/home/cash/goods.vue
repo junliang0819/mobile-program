@@ -20,7 +20,7 @@
         </li>
       </ul>
     </div>
-  </div>  
+  </div>
 </template>
 <style scoped>
   .box {
@@ -39,7 +39,7 @@
     color: #dfa900;
   }
   .box .right {
-    
+
   }
   .box .right li {
 
