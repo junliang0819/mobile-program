@@ -68,17 +68,6 @@
   </div>
 </template>
 
-<script>
-  export default {
-    data () {
-      return {
-      }
-    },
-    methods: {
-
-    }
-  }
-</script>
 <style scoped>
   .margin-bt15 {
     margin-bottom: 15px;
@@ -99,4 +88,14 @@
     vertical-align: top;
   }
 </style>
+<script>
+  export default {
+    data () {
+      return {
+      }
+    },
+    methods: {
+    }
+  }
+</script>
 
