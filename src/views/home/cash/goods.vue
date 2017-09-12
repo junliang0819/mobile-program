@@ -1,25 +1,37 @@
 <template>
-  <div class="box">
-    <div class="left">
-      <ul>
-        <li class="active">商品分类1</li>
-        <li>商品分类2</li>
-        <li>商品分类3</li>
-      </ul>
-    </div>
-    <div class="right">
-      <ul>
-        <li v-for="good in currentGoods" class="ks-clear">
-          <img src="" alt="" width="50">
-          <div>
+  <div>
+    <div class="box">
+      <div class="left">
+        <ul>
+          <li :class="currentIndex==index?'active':''" v-for="(item,index) in types" @click="changeType(item.id,index)">
+            {{item.name}}
+            <mt-badge size="small">30</mt-badge>
+          </li>
+        </ul>
+      </div>
+      <div class="right">
+        <ul>
+          <li v-for="(good,index) in currentGoods" class="ks-clear" @click="chooseGoods(index)">
+            <img :src="good.pic" alt="" width="50" height="50">
             <div>
-              {{good.name}}
+              <div>
+                {{good.name}}
+              </div>
+              ￥ {{good.price}}/千克
             </div>
-            ￥ {{good.price}}/千克
-          </div>
-        </li>
-      </ul>
+            <i v-show="editable" :class="good.choosen?'iconfont icon-rechargefill':'iconfont icon-recharge'"></i>
+          </li>
+        </ul>
+      </div>
     </div>
+    <mt-tabbar v-model="selected" class="is-fixed">
+      <mt-tab-item id="cash" @click.native="editable = true">
+        批量编辑
+      </mt-tab-item>
+      <mt-tab-item id="state">
+        新增商品
+      </mt-tab-item>
+    </mt-tabbar>
   </div>
 </template>
 <style scoped>
@@ -60,23 +72,53 @@
 import Api from '@/api'
 export default {
   mounted () {
-    Api.post('/admin/cate/list')
+    Api.post('/admin/cate/list', {status: 1})
   },
   data () {
     return {
-      types: [],
+      selected: '',
+      currentIndex: 0,
+      editable: false,
+      types: [
+        {
+          id: 1,
+          name: '商品分类1'
+        },
+        {
+          id: 2,
+          name: '商品分类2'
+        }
+      ],
       currentGoods: [
         {
           id: 1,
-          pic: 'xxx',
+          pic: 'http://www.cnblogs.com/skins/summerGarden/images/header.jpg',
           name: '测试商品1',
-          price: '10.00'
+          price: '10.00',
+          choosen: false
         }
       ]
     }
   },
   methods: {
-    goto (path) {
+    changeType (id, index) {
+      this.currentIndex = index
+      this.currentGoods = [
+        {
+          id: 2,
+          pic: 'xxx',
+          name: '测试商品2',
+          price: '10.00',
+          choosen: false
+        }
+      ]
+    },
+    chooseGoods (index) {
+      if (this.editable) {
+        this.currentGoods[index].choosen = !this.currentGoods[index].choosen
+      } else {
+        this.$router.push('./detail')
+      }
     }
   }
 
