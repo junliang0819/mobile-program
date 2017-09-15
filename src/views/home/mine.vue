@@ -79,7 +79,20 @@
 </template>
 
 <script>
+  import Api from '@/api'
   export default {
+    mounted () {
+      Api.post('/admin/coupon/list', {
+        'shopid': 1,
+        'type': 'waitforstart',
+        'pagesize': 2,
+        'page': 1
+      })
+      Api.post('/admin/createadmin', {
+        'phone': '123467',
+        'password': '123456'
+      })
+    },
     data () {
       return {
       }
