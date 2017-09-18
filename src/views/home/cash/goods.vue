@@ -1,5 +1,13 @@
 <template>
   <div>
+    <mt-header title="商品管理">
+      <router-link to="/cash" slot="left">
+        <mt-button icon="back"></mt-button>
+      </router-link>
+      <router-link to="/cash/goods/type" slot="right">
+        分类管理
+      </router-link>
+    </mt-header>
     <div class="box">
       <div class="left">
         <ul>
@@ -11,7 +19,7 @@
       </div>
       <div class="right">
         <ul>
-          <li v-for="(good,index) in types[currentIndex].goods" class="ks-clear" @click="chooseGoods(index)">
+          <li v-for="(good,index) in types[currentIndex].goods" class="ks-clear" @click="chooseGoods(index,good.id)">
             <img :src="good.pic" alt="" width="50" height="50">
             <div>
               <div>
@@ -41,11 +49,11 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    top: 40px;
     bottom: 30px;
   }
   .box .left {
-    background: grey;
+    background: #f4f5f7;
 
   }
   .box .left li{
@@ -59,7 +67,7 @@
     flex: 1;
   }
   .box .right li {
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid #f4f5f7;
     padding: 10px;
   }
   .box .right li>img {
@@ -87,9 +95,14 @@
 
 <script>
 import Api from '@/api'
+import { MessageBox } from 'mint-ui'
 export default {
   mounted () {
-    Api.post('/admin/cate/list', {status: 1})
+    debugger
+    Api.post('/admin/createadmin', {
+      "phone": "123463",
+      "password": "123453"
+    })
   },
   data () {
     return {
@@ -149,7 +162,7 @@ export default {
       this.currentIndex = index
       
     },
-    chooseGoods (index) {
+    chooseGoods (index,id) {
       if (this.editable) {
         let isChosen = this.types[this.currentIndex].goods[index].chosen
         if (!isChosen) {
@@ -159,7 +172,7 @@ export default {
         }
         this.types[this.currentIndex].goods[index].chosen = !this.types[this.currentIndex].goods[index].chosen
       } else {
-        this.$router.push('./detail')
+        this.$router.push(`/cash/goods/detail/${id}`)
       }
     },
     handleLeft () {
@@ -177,7 +190,19 @@ export default {
       this.editable = !this.editable
     },
     handleRight () {
-
+      if(this.editable){
+        let total = 0
+        this.types.forEach(el=>{
+          total += el.chosen
+        })
+        if(total === 0) return
+        MessageBox.confirm(`确定删除这${total}项商品？`).then(action => {
+            // 请求删除商品接口
+            
+        });
+      }else{
+        this.$router.push('/cash/goods/add')
+      }
     }
   }
 
