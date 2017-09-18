@@ -49,6 +49,8 @@ compiler.plugin('compilation', function (compilation) {
 //   app.use(proxyMiddleware(options.filter || context, options))
 // })
 app.use('/admin', proxyMiddleware({target: 'http://118.89.197.228:8080', changeOrigin: true}));
+app.use('/api', proxyMiddleware({target: 'http://trader.tamsc.lwork.com/', changeOrigin: true}));
+
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
 

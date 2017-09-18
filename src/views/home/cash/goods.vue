@@ -98,11 +98,16 @@ import Api from '@/api'
 import { MessageBox } from 'mint-ui'
 export default {
   mounted () {
-    debugger
     Api.post('/admin/createadmin', {
-      "phone": "123463",
-      "password": "123453"
+      "phone": "13434242",
+      "password": "1234fwaf",
+      username: 'wfwfwa'
     })
+    .then(rs=>{
+      console.log(rs)
+    })
+    Api.get('/api/v1/accounts')
+    
   },
   data () {
     return {
