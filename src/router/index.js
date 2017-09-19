@@ -15,6 +15,7 @@ import State from '@/views/home/state'
 import Mine from '@/views/home/mine'
 
 import Store from '@/views/home/mine/store'
+import List from '@/views/home/mine/list'
 
 Vue.use(Router)
 
@@ -72,8 +73,13 @@ let routes = [
   },
   {
     path: '/mine/store',
-    name: 'goods',
+    name: 'store',
     component: Store
+  },
+  {
+    path: '/mine/list',
+    name: 'list',
+    component: List
   }
 ]
 
