@@ -44,9 +44,8 @@
     },
     mounted () {
       Api.post('/admin/shopinfomgr/list').then(rs => {
-        if(rs.status === 200){
-          console.log(rs)
-          this.storeList = rs.data.shoplist
+        if(!rs.error_response){
+          this.storeList = rs.shoplist
         }
       })
     }
