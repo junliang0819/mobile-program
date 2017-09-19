@@ -7,7 +7,9 @@ let api = {
     })
   },
   post (url, data) {
-    return axios.post(url,data)
+    return axios.post(url,data).then(rs=>{
+      return rs.data
+    })
   }
 }
 

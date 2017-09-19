@@ -6,6 +6,10 @@ import Goods from '@/views/home/cash/goods'
 import GoodsType from '@/views/home/cash/goods_type'
 import GoodsDetail from '@/views/home/cash/goods_detail'
 import GoodsAdd from '@/views/home/cash/goods_add'
+import Coupon from '@/views/coupon/index'
+import AddCoupon from '@/views/coupon/add'
+
+
 
 import State from '@/views/home/state'
 import Mine from '@/views/home/mine'
@@ -18,6 +22,7 @@ let routes = [
   {
     path: '/',
     name: 'home',
+    redirect: '/cash',
     component: Home,
     children: [
       {
@@ -56,6 +61,14 @@ let routes = [
     path: '/cash/goods/add',
     name: 'add',
     component: GoodsAdd
+  },
+  {
+    path: '/coupon',
+    component: Coupon
+  },
+  {
+    path: '/coupon/add',
+    component: AddCoupon
   },
   {
     path: '/mine/store',

@@ -68,12 +68,23 @@
 </style>
 
 <script>
+import Api from '@/api'
 export default {
+  mounted() {
+    Api.post('/admin/login', {
+      "phone": "1814242525",
+      "password": "1234fwaf",
+      username: 'wfwfwa'
+    })
+    .then(rs=>{
+      console.log(rs)
+    })
+  },
   data () {
     return {
       items: [
         {
-          path: 'goods',
+          path: 'cash/goods',
           type: 'red',
           icon: 'iconfont icon-goods',
           name: '商品管理'
@@ -99,6 +110,7 @@ export default {
           name: '储值'
         },
         {
+          path: 'coupon',
           type: 'green',
           icon: 'iconfont icon-youhuijuan',
           name: '优惠券'
@@ -113,7 +125,7 @@ export default {
   },
   methods: {
     goto (path) {
-      this.$router.push(`cash/${path}`)
+      this.$router.push(path)
     }
   }
 
