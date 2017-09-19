@@ -82,16 +82,14 @@
   import Api from '@/api'
   export default {
     mounted () {
-      Api.post('/admin/coupon/list', {
-        'shopid': 1,
-        'type': 'waitforstart',
-        'pagesize': 2,
-        'page': 1
-      })
       Api.post('/admin/createadmin', {
-        'phone': '123467',
-        'password': '123456'
+        "phone": "13434242",
+        "password": "1234fwaf"
       })
+        .then(rs=>{
+          console.log(rs)
+        })
+      Api.get('/api/v1/accounts')
     },
     data () {
       return {
