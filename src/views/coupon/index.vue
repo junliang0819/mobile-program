@@ -18,7 +18,7 @@
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="1">
         <ul>
-          <li v-for="coupon in allList">
+          <li v-for="coupon in allList" class="ks-clear">
             <span class="text">已同步至微信卡券</span>
             <div class="top">
               <div>{{coupon.name}}</div>
@@ -30,10 +30,10 @@
                 {{coupon.endTime}}
               </div>
             </div>
-            <span>
+            <span class="left">
               二维码发券
             </span>
-            <span>
+            <span class="left">
               分享发券
             </span>
           </li>
@@ -51,11 +51,20 @@
     </mt-tab-container>
   </div>  
 </template>
-<style scoped>
+<style lang="less" scoped>
   li {
     position: relative;
+    background: #fff;
     margin-bottom: 20px;
-
+    .left {
+      float: left;
+      width: 49.5%;
+      text-align: center;
+      margin: 10px 0;
+      &+.left {
+        border-left: 1px solid grey;
+      }
+    }
   }
   .text {
     position: absolute;
@@ -76,6 +85,7 @@
   .red {
     color: #ff4e00;
   }
+  
 </style>
 
 <script>
