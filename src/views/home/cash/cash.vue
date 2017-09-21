@@ -20,7 +20,7 @@
         {{item.name}}
       </span>
     </div>
-  </div>  
+  </div>
 </template>
 <style scoped>
   .top {
@@ -76,9 +76,6 @@ export default {
       "password": "1234fwaf",
       username: 'wfwfwa'
     })
-    .then(rs=>{
-      console.log(rs)
-    })
   },
   data () {
     return {
@@ -100,6 +97,7 @@ export default {
           name: '顾客'
         },
         {
+          path: 'cash/member',
           type: 'blue',
           icon: 'iconfont icon-huiyuanqia',
           name: '会员卡'

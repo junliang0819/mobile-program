@@ -17,6 +17,8 @@ import Mine from '@/views/home/mine'
 import StoreAdd from '@/views/home/mine/store_add'
 import StoreList from '@/views/home/mine/store_list'
 
+import Member from '@/views/member/index'
+
 Vue.use(Router)
 
 let routes = [
@@ -70,6 +72,10 @@ let routes = [
   {
     path: '/coupon/add',
     component: AddCoupon
+  },
+  {
+    path: '/cash/member',
+    component: Member
   },
   {
     path: '/mine/store_list/store_add',
