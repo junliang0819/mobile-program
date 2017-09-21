@@ -1,5 +1,13 @@
 <template>
   <div style="background-color: #eeeeee">
+    <mt-header title="新增门店">
+      <router-link to="./" slot="left">
+        <mt-button icon="back"></mt-button>
+      </router-link>
+      <router-link v-on:click="addStore" to="/mine/store_list/store_add" slot="right">
+        保存
+      </router-link>
+    </mt-header>
     <div class="margin-bt15">
       <mt-cell is-link to="/mine/store">
         <div slot="title" class="store">
@@ -152,8 +160,12 @@
       }
     },
     methods: {
-      open () {
-        this.visible = true
+      addStore () {
+        Api.post('/admin/shopmgr/create').then(rs => {
+          if(!rs.error_response){
+            this.storeList = rs.shoplist
+          }
+        })
       },
       confirm () {
         this.visible = false

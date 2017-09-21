@@ -14,8 +14,8 @@ import AddCoupon from '@/views/coupon/add'
 import State from '@/views/home/state'
 import Mine from '@/views/home/mine'
 
-import Store from '@/views/home/mine/store'
-import List from '@/views/home/mine/list'
+import StoreAdd from '@/views/home/mine/store_add'
+import StoreList from '@/views/home/mine/store_list'
 
 Vue.use(Router)
 
@@ -72,14 +72,14 @@ let routes = [
     component: AddCoupon
   },
   {
-    path: '/mine/store',
+    path: '/mine/store_list/store_add',
     name: 'store',
-    component: Store
+    component: StoreAdd
   },
   {
-    path: '/mine/list',
+    path: '/mine/store_list',
     name: 'list',
-    component: List
+    component: StoreList
   }
 ]
 

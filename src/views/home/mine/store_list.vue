@@ -1,5 +1,13 @@
 <template>
   <div style="background-color: #eeeeee">
+    <mt-header title="门店列表">
+      <router-link to="./" slot="left">
+        <mt-button icon="back"></mt-button>
+      </router-link>
+      <router-link to="/mine/store_list/store_add" slot="right">
+        添加
+      </router-link>
+    </mt-header>
     <mt-cell v-for="store in storeList" :key="store.id">
       <div v-on:click="selectStore(store.id)" slot="title" class="store">
         <div class="inline-block">
@@ -43,7 +51,7 @@
       }
     },
     mounted () {
-      Api.post('/admin/shopinfomgr/list').then(rs => {
+      Api.post('/admin/shopmgr/list').then(rs => {
         if(!rs.error_response){
           this.storeList = rs.shoplist
         }
