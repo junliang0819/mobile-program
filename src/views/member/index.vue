@@ -74,13 +74,12 @@ import moment from 'moment'
 export default {
   mounted() {
     Api.post('/admin/coupon/list',{
-      "shopid":1,//店铺id
-      "type": "all",//优惠券类型，可选值为，"all","waitforstart","running","end"，分别对应全部，还未开始，进行中，结束
-      "pagesize":5,//分页大小
-      "page":1//当前页
+      "shopid":1,
+      "type": "all",
+      "pagesize":5,
+      "page":1
     })
     .then(rs=>{
-      console.log(rs)
       if(rs['error_response']){
 
       }else{

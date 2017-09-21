@@ -85,10 +85,6 @@
       Api.post('/admin/login', {
         "phone": "13434242",
         "password": "1234fwaf"
-      }).then(rs => {
-          if(rs.status === 200){
-
-          }
       })
     },
     data () {
