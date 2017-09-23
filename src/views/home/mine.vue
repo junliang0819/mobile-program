@@ -12,7 +12,7 @@
         </div>
         <i class="iconfont icon-weibiaoti10101"></i>
       </mt-cell>
-      <mt-cell title="切换门店" is-link value="测试" to="/mine/list"></mt-cell>
+      <mt-cell title="切换门店" is-link value="测试" to="/mine/store_list"></mt-cell>
     </div>
     <div style="margin-bottom: 15px;">
       <mt-cell is-link>
@@ -85,10 +85,6 @@
       Api.post('/admin/login', {
         "phone": "13434242",
         "password": "1234fwaf"
-      }).then(rs => {
-          if(rs.status === 200){
-
-          }
       })
     },
     data () {

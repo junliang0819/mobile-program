@@ -15,7 +15,7 @@
         {{item.name}}
       </span>
     </div>
-  </div>  
+  </div>
 </template>
 <style lang="less" scoped>
   .top {
@@ -71,9 +71,6 @@ export default {
       "phone": "1814242525",
       "password": "1234fwaf",
       username: 'wfwfwa'
-    })
-    .then(rs=>{
-      console.log(rs)
     })
   },
   data () {

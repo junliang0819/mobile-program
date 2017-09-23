@@ -1,0 +1,106 @@
+<template>
+  <div>
+    <mt-header title="优惠券">
+      <router-link to="." slot="left">
+        <mt-button icon="back"></mt-button>
+      </router-link>
+      <router-link to="/coupon/add" slot="right">
+        添加
+      </router-link>
+    </mt-header>
+    <ul>
+      <li v-for="coupon in allList" class="ks-clear">
+        <span class="text">已同步至微信卡券</span>
+        <div class="top">
+          <div>{{coupon.name}}</div>
+          <div class="price red">￥{{coupon.amount}}</div>
+          <div class="date">
+            使用期限：
+            {{coupon.startTime}}
+            -
+            {{coupon.endTime}}
+          </div>
+        </div>
+        <span class="left">
+              二维码发券
+            </span>
+        <span class="left">
+              分享发券
+            </span>
+      </li>
+    </ul>
+  </div>
+</template>
+<style lang="less" scoped>
+  li {
+    position: relative;
+    background: #fff;
+    margin-bottom: 20px;
+    .left {
+      float: left;
+      width: 49.5%;
+      text-align: center;
+      margin: 10px 0;
+      &+.left {
+        border-left: 1px solid grey;
+      }
+    }
+  }
+  .text {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #dfa900;
+  }
+  .top {
+    padding: 10px;
+    border-bottom: 2px solid #ff4e00;
+  }
+  .date {
+    font-size: 12px;
+  }
+  .price {
+    font-size: 30px;
+  }
+  .red {
+    color: #ff4e00;
+  }
+
+</style>
+
+<script>
+import Api from '@/api'
+import moment from 'moment'
+export default {
+  mounted() {
+    Api.post('/admin/coupon/list',{
+      "shopid":1,
+      "type": "all",
+      "pagesize":5,
+      "page":1
+    })
+    .then(rs=>{
+      if(rs['error_response']){
+
+      }else{
+        this.allList = rs.coupons.map(el=>{
+          el.startTime = moment(el.startTime).format('YYYY-MM-DD HH:mm')
+          el.endTime = moment(el.endTime).format('YYYY-MM-DD HH:mm')
+          return el
+        })
+      }
+    })
+  },
+  data () {
+    return {
+      selected: "1",
+      allList: []
+    }
+  },
+  methods: {
+
+  }
+
+}
+</script>
+

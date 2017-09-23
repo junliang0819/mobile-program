@@ -1,13 +1,13 @@
 <template>
   <div style="background-color: #eeeeee">
     <mt-cell v-for="store in storeList" :key="store.id">
-      <div slot="title" class="store">
+      <div v-on:click="selectStore(store.id)" slot="title" class="store">
         <div class="inline-block">
           <i class="iconfont icon-kxbshop2"></i>
           <span>{{store.displayname}}</span>
         </div>
       </div>
-      <i class="iconfont icon-kxbshop2"></i>
+      <i v-on:click="selectStore(store.id)" class="iconfont icon-kxbshop2"></i>
     </mt-cell>
   </div>
 </template>
