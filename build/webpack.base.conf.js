@@ -44,6 +44,11 @@ module.exports = {
         options: vueLoaderConfig
       },
       {
+        test: /\.less$/,
+        loader: 'less-loader',
+        include: [resolve('src'), resolve('test')]
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]

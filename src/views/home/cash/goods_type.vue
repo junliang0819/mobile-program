@@ -4,26 +4,29 @@
       <router-link to="/cash/goods" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
-      <span slot="right">编辑</span>
+      <span slot="right" @click="edit">{{editable?'取消':'编辑'}}</span>
     </mt-header>
-    <ul>
-      <li v-for="item in types">
-        {{item.name}}
-      </li>
-    </ul>
+    <mt-cell :key="item.id" v-for="(item,index) in types" :title="item.name">
+      <mt-button v-show="editable" size="small" type="primary" style="margin-right: 10px;" @click="change(index)">修改</mt-button>
+      <mt-button v-show="editable" size="small" type="danger" @click="del(index)">删除</mt-button>
+    </mt-cell>
     <div class="bottom" @click="addType">
       添加分类
     </div>
   </div>
 </template>
-<style scoped>
+<style lang="less" scoped>
+  @import '../../../assets/css/colors.less';
   .bottom {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    color: #dfa900;
+    color: @yellow;
     text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    border-top: 1px solid @yellow;
   }
 </style>
 
@@ -36,6 +39,7 @@ export default {
   },
   data () {
     return {
+      editable: false,
       types: [
         {
           id: 1,
@@ -49,6 +53,19 @@ export default {
     }
   },
   methods: {
+    edit() {
+      this.editable = !this.editable
+    },
+    change(index) {
+      MessageBox.prompt('修改分类名','').then(({ value, action }) => {
+        if(!value.trim()) return
+        // 请求修改分类接口
+        this.types[index].name = value.trim()
+      });
+    },
+    del(index) {
+      this.types.splice(index,1)
+    },
     addType() {
       MessageBox.prompt('新增分类','').then(({ value, action }) => {
         if(!value.trim()) return

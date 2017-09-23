@@ -11,7 +11,6 @@ import AddCoupon from '@/views/coupon/add'
 
 
 
-import State from '@/views/home/state'
 import Mine from '@/views/home/mine'
 
 import Store from '@/views/home/mine/store'
@@ -30,11 +29,6 @@ let routes = [
         path: 'cash',
         name: 'cash',
         component: Cash
-      },
-      {
-        path: 'state',
-        name: 'state',
-        component: State
       },
       {
         path: 'mine',

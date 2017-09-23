@@ -9,28 +9,42 @@
     <section>
       <mt-field label="优惠券名称" placeholder="用优惠亮点，吸引顾客获取" v-model="name"></mt-field>
       <mt-field label="发放总量" type="number" placeholder="输入发放数量" v-model="total"></mt-field>
-      <mt-field label="优惠面值" placeholder="设置每张券面值" v-model="price"></mt-field>
+      <mt-field label="优惠面值" type="number" placeholder="设置每张券面值" v-model="price"></mt-field>
     </section>
     <section>
-      <mt-field label="生效时间" type="date" placeholder="设置时间" v-model="start"></mt-field>
-      <mt-field label="过期时间" type="date" placeholder="设置时间" v-model="end"></mt-field>
+      <mt-field label="生效时间" placeholder="设置时间">
+        <mt-datetime-picker
+          ref="picker"
+          type="datetime"
+          v-model="start">
+        </mt-datetime-picker>
+      </mt-field>
+      <mt-field label="过期时间" placeholder="设置时间">
+        <mt-datetime-picker
+          ref="picker"
+          type="datetime"
+          v-model="end">
+        </mt-datetime-picker>
+      </mt-field>
     </section>
     <section>
       <mt-field label="每人限领" placeholder="设置限领" v-model="limit"></mt-field>
     </section>
     <section>
-      <mt-field label="到期前4天提醒客户一次">
+      <mt-field label="到期前4天提醒客户一次" type="date">
         <mt-switch v-model="isMind"></mt-switch>
       </mt-field>
-      <mt-field label="允许分享领取链接">
+      <mt-field label="允许分享领取链接" type="date">
         <mt-switch v-model="canShare"></mt-switch>
       </mt-field>
       <mt-field label="使用说明" type="textarea" placeholder="输入活动的详细说明" v-model="info"></mt-field>
     </section>
   </div>  
 </template>
-<style scoped>
-  
+<style lang="less" scoped>
+  section {
+    margin-bottom: 20px;
+  }
 </style>
 
 <script>
@@ -42,6 +56,7 @@ export default {
       total: '',
       price: '',
       start: '',
+      limit: '',
       end: '',
       info: '',
       isMind: false,

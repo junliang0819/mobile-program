@@ -42,7 +42,8 @@
     </div>
   </div>
 </template>
-<style scoped>
+<style lang="less" scoped>
+  @import '../../../assets/css/colors.less';
   .box {
     display: flex;
     justify-content: flex-start;
@@ -50,10 +51,10 @@
     left: 0;
     right: 0;
     top: 40px;
-    bottom: 30px;
+    bottom: 40px;
   }
   .box .left {
-    background: #f4f5f7;
+    background: @grey;
 
   }
   .box .left li{
@@ -61,21 +62,25 @@
   }
   .box .left li.active{
     background: #fff;
-    color: #dfa900;
+    color: @yellow;
   }
   .box .right {
     flex: 1;
   }
   .box .right li {
-    border-bottom: 1px solid #f4f5f7;
+    border-bottom: 1px solid @grey;
     padding: 10px;
+    i {
+      float: right;
+    }
   }
   .box .right li>img {
     float: left;
   }
   .box .right li>div {
-    float: right;
-    color: #dfa900;
+    float: left;
+    color: @yellow;
+    margin-left: 20px;
   }
   .box .right li>div>div {
     color: #000;
@@ -90,6 +95,10 @@
   .fix-bottom span {
     float: left;
     width: 50%;
+    padding: 10px;
+    &:first-child {
+      border-right: 1px solid @grey; 
+    }
   }
 </style>
 

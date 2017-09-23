@@ -1,44 +1,27 @@
 <template>
   <div class="content">
     <mt-header title="商品详情">
-      <router-link to="/cash/goods" slot="left">
+      <router-link to="../" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
       <router-link to="/cash/goods/add" slot="right">
         编辑
       </router-link>
     </mt-header>
-    <section class="top">
-      <img src="" alt="">
-      <div>
-        <div>测试</div>
-        <div>商品编码：wfwgwFEFEAA</div>
-        <div>商品分类：默认分类</div>
-      </div>
+    <section>
+      <mt-cell title="商品名称" value="说明文字"></mt-cell>
+      <mt-cell title="商品描述" value="说明文字"></mt-cell>
     </section>
-    <section class="center">
-      <ul>
-        <li>
-          <div>10</div>
-          <div>编码：11</div>
-          <div>零售价：￥10.00/千克</div>
-        </li>
-        <li>
-          <div>5</div>
-          <div>编码：11</div>
-          <div>零售价：￥10.00/千克</div>
-        </li>
-      </ul>
+    <section>
+      <mt-cell title="商品规格" value="说明文字"></mt-cell>
     </section>
-    <section class="bottom">
-      <ul>
-        <li>备注</li>
-        <li>
-          商品在售
-          <mt-switch v-model="value"></mt-switch>
-        </li>
-      </ul>
+    <section>
+      <mt-cell title="分享可获取点数" value="说明文字"></mt-cell>
+      <mt-cell title="商品详细信息" value="说明文字"></mt-cell>
     </section>
+    <mt-cell title="商品是否在售">
+      <mt-switch v-model="isSale"></mt-switch>
+    </mt-cell>
   </div>
 </template>
 <style scoped>
@@ -66,7 +49,7 @@ export default {
   },
   data () {
     return {
-      a: {}
+      isSale: true
     }
   },
   methods: {

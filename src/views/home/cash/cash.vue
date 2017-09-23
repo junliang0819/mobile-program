@@ -1,18 +1,13 @@
 <template>
   <div>
     <div class="top">
-      <span>
-        <i class="iconfont icon-sweep"></i>
-        收款
-      </span>
-      <span>
-        <i class="iconfont icon-gouwuchefill"></i>
-        开单
-      </span>
-      <span>
-        <i class="iconfont icon-saoyisao"></i>
-        扫一扫
-      </span>
+      <div class="switch">
+        <select value="店铺">
+          <option value="1">中和小吃</option>
+          <option value="2">银泰城面包</option>
+        </select>
+      </div>
+      <img src="http://fuss10.elemecdn.com/7/85/e478e4b26af74f4539c79f31fde80jpeg.jpeg" alt="">
     </div>
     <div class="bottom ks-clear">
       <span v-for="item in items" :class="item.type" @click="goto(item.path)">
@@ -22,25 +17,26 @@
     </div>
   </div>  
 </template>
-<style scoped>
+<style lang="less" scoped>
   .top {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     background: black;
     color: #dfa900;
-    height: 200px;
+    height: 250px;
     font-size: 16px;
     opacity: .8;
-  }
-  .top span {
-    text-align: center;
-  }
-  .top i {
-    display: block;
-    font-size: 50px;
+    .switch {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+    img {
+      height: 100%;
+    }
   }
   .bottom {
+    background: #fff;
     margin-top: 20px;
     margin-bottom: 41px;
     font-size: 16px;
@@ -90,24 +86,10 @@ export default {
           name: '商品管理'
         },
         {
-          type: 'green',
-          icon: 'iconfont icon-shouru',
-          name: '我的收入'
-        },
-        {
-          type: 'blue',
-          icon: 'iconfont icon-my_fill_light',
-          name: '顾客'
-        },
-        {
-          type: 'blue',
-          icon: 'iconfont icon-huiyuanqia',
-          name: '会员卡'
-        },
-        {
-          type: 'green',
-          icon: 'iconfont icon-chuzhiqia',
-          name: '储值'
+          path: 'cash/goods',
+          type: 'red',
+          icon: 'iconfont icon-goods',
+          name: '店铺管理'
         },
         {
           path: 'coupon',
@@ -117,8 +99,23 @@ export default {
         },
         {
           type: 'blue',
+          icon: 'iconfont icon-my_fill_light',
+          name: '顾客'
+        },
+        {
+          type: 'green',
+          icon: 'iconfont icon-chuzhiqia',
+          name: '消费记录'
+        },
+        {
+          type: 'blue',
           icon: 'iconfont icon-laba',
-          name: '会员通知'
+          name: '图片管理'
+        },
+        {
+          type: 'green',
+          icon: 'iconfont icon-shouru',
+          name: '我的收入'
         }
       ]
     }

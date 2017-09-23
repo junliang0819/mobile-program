@@ -6,10 +6,6 @@
         <i class="iconfont icon-rechargefill"></i>
         收银
       </mt-tab-item>
-      <mt-tab-item id="state">
-        <i class="iconfont icon-danju-xianxing"></i>
-        流水
-      </mt-tab-item>
       <mt-tab-item id="mine">
         <i class="iconfont icon-my_light"></i>
         我的
