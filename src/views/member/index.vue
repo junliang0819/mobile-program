@@ -21,12 +21,6 @@
             {{coupon.endTime}}
           </div>
         </div>
-        <span class="left">
-              二维码发券
-            </span>
-        <span class="left">
-              分享发券
-            </span>
       </li>
     </ul>
   </div>
