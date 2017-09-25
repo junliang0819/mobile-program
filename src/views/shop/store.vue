@@ -1,7 +1,7 @@
 <template>
   <div style="background-color: #eeeeee">
     <mt-header title="门店列表">
-      <router-link to="." slot="left">
+      <router-link to="/cash/shop" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
       <router-link to="/cash/shop/shop_add" slot="right">

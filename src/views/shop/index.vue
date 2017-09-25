@@ -63,7 +63,7 @@
         console.log(id)
       },
       chooseShop (id) {
-        this.$router.push(`/cash/shop/store${id}`)
+        this.$router.push(`/cash/shop/store/${id}`)
       },
       addShop() {
         MessageBox.prompt('新增店铺','').then(({ value, action }) => {

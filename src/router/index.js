@@ -78,7 +78,7 @@ let routes = [
     component: Shop
   },
   {
-    path: '/cash/shop/store:id',
+    path: '/cash/shop/store/:id',
     name: 'store',
     component: Store
   },
