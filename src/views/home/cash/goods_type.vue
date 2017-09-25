@@ -33,46 +33,61 @@
 <script>
 import Api from '@/api'
 import { MessageBox } from 'mint-ui'
+import Store from '@/utils/store'
 export default {
   mounted () {
-    Api.post('/admin/cate/list', {status: 1})
+    this.getTypes()
   },
   data () {
     return {
       editable: false,
-      types: [
-        {
-          id: 1,
-          name: '商品分类1'
-        },
-        {
-          id: 2,
-          name: '商品分类2'
-        }
-      ]
+      types: []
     }
   },
   methods: {
+    getTypes() {
+      Api.post('/admin/category/list',{
+        shopid: Store.getShopId()
+      })
+      .then(rs=>{
+        this.types = rs.cates
+      })
+    },
     edit() {
       this.editable = !this.editable
     },
     change(index) {
       MessageBox.prompt('修改分类名','').then(({ value, action }) => {
         if(!value.trim()) return
-        // 请求修改分类接口
-        this.types[index].name = value.trim()
+        Api.post('/admin/category/modify',{
+          "id": this.types[index].id,
+          "shopid": Store.getShopId(),
+          "name": value.trim()
+        })
+        .then(rs=>{
+          this.types[index].name = value.trim()
+        })
       });
     },
     del(index) {
-      this.types.splice(index,1)
+      Api.post('/admin/category/delete',{
+          "shopid":1,
+	        "cateids":[this.types[index].id]//需要删除的分类id
+        })
+        .then(rs=>{
+          this.types.splice(index,1)
+        })
+      
     },
     addType() {
       MessageBox.prompt('新增分类','').then(({ value, action }) => {
         if(!value.trim()) return
-        // 请求新增分类接口
-        this.types.push({
-          id: '',
+        Api.post('/admin/category/create',{
+          shopid: Store.getShopId(),
           name: value.trim()
+        })
+        .then(rs=>{
+          this.getTypes()
         })
       });
     }

@@ -107,8 +107,11 @@ import Api from '@/api'
 import { MessageBox } from 'mint-ui'
 export default {
   mounted () {
-    
-    Api.get('/api/v1/accounts')
+    Api.post('/admin/product/list',{ 
+      "cateid":1, //分类id
+      "pagesize":2,//分页大小
+      "page":1 //当前页
+    })
     
   },
   data () {
