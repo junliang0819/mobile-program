@@ -1,12 +1,12 @@
 <template>
   <div style="background-color: #eeeeee">
-    <mt-header title="店铺列表">
-      <router-link to="/cash/shop" slot="left">
+    <mt-header title="收银员列表">
+      <router-link to=".." slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
-      <router-link to="/cash/shop/employee_add" slot="right">
+      <div @click="addEmployee" slot="right">
         添加
-      </router-link>
+      </div>
     </mt-header>
     <mt-cell v-for="admin in adminList" :key="admin.id">
       <div slot="title" class="store">
@@ -46,10 +46,12 @@
       }
     },
     methods: {
-
+      addEmployee () {
+        this.$router.push(`/cash/shop/store/${this.$route.params.shopId}/employee/${this.$route.params.storeId}/employee_add`)
+      }
     },
     mounted () {
-      Api.post('/admin/shopinfomgr/getadmins',{shopinfoid: 1}).then(rs => {
+      Api.post('/admin/shopinfomgr/getadmins',{shopinfoid: this.$route.params.shopId}).then(rs => {
         if(!rs.error_response){
           this.adminList = rs.admins
         }

@@ -27,12 +27,14 @@
         :visible-item-count="5"
         class="mint-datetime-picker"
         ref="picker"
-        v-model="value"
         show-toolbar>
         <span class="mint-datetime-action mint-datetime-cancel" @click="visible = false;$emit('cancel')">取消</span>
         <span class="mint-datetime-action mint-datetime-confirm" @click="confirm">确定</span>
       </mt-picker>
     </mt-popup>
+    <section>
+      <mt-field placeholder="详细地址" v-model="fulladdress"></mt-field>
+    </section>
   </div>
 </template>
 <style lang="less" scoped>
@@ -51,8 +53,8 @@ export default {
   data () {
     return {
       displayname: '',
+      fulladdress: '',
       phone: '',
-      value: null,
       visible: false,
       companyName: '',
       addressSlots: [
@@ -95,6 +97,7 @@ export default {
     confirm () {
       this.visible = false
       this.address = this.addressProvince + this.addressCity + this.addressXian
+      console.log(this.address + this.fulladdress)
     },
     onAddressChange (picker, values) {
       let shi = Object.keys(s[values[0]])

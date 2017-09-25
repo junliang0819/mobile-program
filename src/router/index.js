@@ -80,22 +80,22 @@ let routes = [
     component: Shop
   },
   {
-    path: '/cash/shop/store/:id',
+    path: '/cash/shop/store/:shopId',
     name: 'store',
     component: Store
   },
   {
-    path: '/cash/shop/store_add',
+    path: '/cash/shop/store/:shopId/store_add',
     name: 'store_add',
     component: StoreAdd
   },
   {
-    path: '/cash/shop/employee/:id',
+    path: '/cash/shop/store/:shopId/employee/:storeId',
     name: 'employee',
     component: Employee
   },
   {
-    path: '/cash/shop/employee_add',
+    path: '/cash/shop/store/:shopId/employee/:storeId/employee_add',
     name: 'employee_add',
     component: EmployeeAdd
   }

@@ -1,9 +1,12 @@
 <template>
   <div style="background-color: #eeeeee">
     <mt-header title="门店列表">
-      <router-link to="/cash/shop" slot="left">
+      <router-link to=".." slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
+      <div @click="addStore" slot="right">
+        新增
+      </div>
     </mt-header>
     <mt-cell v-for="store in storeList" :key="store.id">
       <div @click="chooseStore(store.id)" slot="title" class="store">
@@ -36,6 +39,14 @@
 </style>
 <script>
   import Api from '@/api'
+  function getList () {
+    var _this = this
+    Api.post('/admin/shopinfomgr/list', {shopinfoid: _this.$route.params.shopId}).then(rs => {
+      if(!rs.error_response){
+        _this.storeList = rs.shoplist
+      }
+    })
+  }
   export default {
     data () {
       return {
@@ -44,18 +55,17 @@
     },
     methods: {
       selectStore (id) {
-        console.log(id)
+
+      },
+      addStore () {
+        this.$router.push(`/cash/shop/store/${this.$route.params.shopId}/store_add`)
       },
       chooseStore (id) {
-        this.$router.push(`/cash/shop/employee/${id}`)
+        this.$router.push(`/cash/shop/store/${this.$route.params.shopId}/employee/${id}`)
       }
     },
     mounted () {
-      Api.post('/admin/shopinfomgr/list').then(rs => {
-        if(!rs.error_response){
-          this.storeList = rs.shoplist
-        }
-      })
+      getList.apply(this, [])
     }
   }
 </script>

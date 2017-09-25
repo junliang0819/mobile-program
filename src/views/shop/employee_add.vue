@@ -1,6 +1,10 @@
 <template>
-  <div style="background-color: #eeeeee">
-
+  <div>
+    <mt-header title="新增收银员">
+      <router-link to="." slot="left">
+        <mt-button icon="back"></mt-button>
+      </router-link>
+    </mt-header>
   </div>
 </template>
 
@@ -22,7 +26,7 @@
 
     },
     mounted () {
-      Api.get('/admin/shopinfomgr/getbarcode?id=123&&width=300&&height=300').then(rs => {
+      Api.get(`/admin/shopinfomgr/getbarcode?id=${this.$route.params.shopId}&&width=300&&height=300`).then(rs => {
         if(!rs.error_response){
           this.adminList = rs.admins
         }

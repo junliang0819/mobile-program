@@ -52,6 +52,15 @@
 <script>
   import Api from '@/api'
   import { MessageBox } from 'mint-ui'
+
+  function getList(){
+    let _this = this;
+    Api.post('/admin/shopmgr/list').then(rs => {
+      if(!rs.error_response){
+        _this.shopList = rs.shoplist
+      }
+    })
+  }
   export default {
     data () {
       return {
@@ -59,11 +68,11 @@
       }
     },
     methods: {
-      selectStore (id) {
-        console.log(id)
-      },
       chooseShop (id) {
         this.$router.push(`/cash/shop/store/${id}`)
+      },
+      getList () {
+        getList.apply(this, []);
       },
       addShop() {
         MessageBox.prompt('新增店铺','').then(({ value, action }) => {
@@ -71,22 +80,14 @@
           // 请求新增分类接口
           Api.post('/admin/shopmgr/create',{shopname: value.trim()}).then(rs => {
             if(!rs.error_response){
-              Api.post('/admin/shopmgr/list').then(rs => {
-                if(!rs.error_response){
-                  this.shopList = rs.shoplist
-                }
-              })
+              getList.apply(this, []);
             }
           })
         });
       }
     },
     mounted () {
-      Api.post('/admin/shopmgr/list').then(rs => {
-        if(!rs.error_response){
-          this.shopList = rs.shoplist
-        }
-      })
+      getList.apply(this, []);
     }
   }
 </script>
