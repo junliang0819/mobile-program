@@ -15,6 +15,7 @@ import Mine from '@/views/home/mine'
 
 import Shop from '@/views/shop/index'
 import Store from '@/views/shop/store'
+import Employee from '@/views/shop/employee'
 
 import Member from '@/views/member/index'
 
@@ -77,9 +78,14 @@ let routes = [
     component: Shop
   },
   {
-    path: '/cash/store',
-    name: 'list',
+    path: '/cash/shop/store:id',
+    name: 'store',
     component: Store
+  },
+  {
+    path: '/cash/shop/store:id/employee:id',
+    name: 'employee',
+    component: Employee
   }
 ]
 

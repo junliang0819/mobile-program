@@ -1,26 +1,38 @@
 <template>
   <div style="background-color: #eeeeee">
-    <mt-header title="门店列表">
-      <router-link to="./" slot="left">
+    <mt-header title="店铺列表">
+      <router-link to="." slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
-      <router-link to="/mine/store_list/store_add" slot="right">
-        添加
-      </router-link>
     </mt-header>
-    <mt-cell v-for="store in storeList" :key="store.id">
-      <div v-on:click="selectStore(store.id)" slot="title" class="store">
+    <mt-cell v-for="shop in shopList" :key="shop.id">
+      <div @click="chooseShop(shop.id)" slot="title" class="store">
         <div class="inline-block">
           <i class="iconfont icon-kxbshop2"></i>
-          <span>{{store.displayname}}</span>
+          <span>{{shop.shopname}}</span>
         </div>
       </div>
-      <i v-on:click="selectStore(store.id)" class="iconfont icon-kxbshop2"></i>
+      <i @click="chooseShop(shop.id)" class="iconfont icon-kxbshop2"></i>
     </mt-cell>
+    <div class="bottom" @click="addShop">
+      添加分类
+    </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
+  @import '../../assets/css/colors.less';
+  .bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: @yellow;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    border-top: 1px solid @yellow;
+  }
   .store {
     padding: 5px 0 10px;
     border-top: none;
@@ -39,21 +51,40 @@
 </style>
 <script>
   import Api from '@/api'
+  import { MessageBox } from 'mint-ui'
   export default {
     data () {
       return {
-        storeList: []
+        shopList: []
       }
     },
     methods: {
       selectStore (id) {
         console.log(id)
+      },
+      chooseShop (id) {
+        this.$router.push(`/cash/shop/store${id}`)
+      },
+      addShop() {
+        MessageBox.prompt('新增店铺','').then(({ value, action }) => {
+          if(!value.trim()) return
+          // 请求新增分类接口
+          Api.post('/admin/shopmgr/create',{shopname: value.trim()}).then(rs => {
+            if(!rs.error_response){
+              Api.post('/admin/shopmgr/list').then(rs => {
+                if(!rs.error_response){
+                  this.shopList = rs.shoplist
+                }
+              })
+            }
+          })
+        });
       }
     },
     mounted () {
       Api.post('/admin/shopmgr/list').then(rs => {
         if(!rs.error_response){
-          this.storeList = rs.shoplist
+          this.shopList = rs.shoplist
         }
       })
     }

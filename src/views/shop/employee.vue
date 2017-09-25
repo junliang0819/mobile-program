@@ -1,21 +1,21 @@
 <template>
   <div style="background-color: #eeeeee">
-    <mt-header title="门店列表">
+    <mt-header title="店铺列表">
       <router-link to="." slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
-      <router-link to="/cash/shop/shop_add" slot="right">
+      <router-link to="/cash/shop" slot="right">
         添加
       </router-link>
     </mt-header>
     <mt-cell v-for="store in storeList" :key="store.id">
-      <div @click="chooseStore(store.id)" slot="title" class="store">
+      <div v-on:click="selectStore(store.id)" slot="title" class="store">
         <div class="inline-block">
           <i class="iconfont icon-kxbshop2"></i>
           <span>{{store.displayname}}</span>
         </div>
       </div>
-      <i @click="chooseStore(store.id)" class="iconfont icon-kxbshop2"></i>
+      <i v-on:click="selectStore(store.id)" class="iconfont icon-kxbshop2"></i>
     </mt-cell>
   </div>
 </template>
@@ -48,9 +48,6 @@
     methods: {
       selectStore (id) {
         console.log(id)
-      },
-      chooseShop (id) {
-        this.$router.push(`/cash/shop/employee/${id}`)
       }
     },
     mounted () {
