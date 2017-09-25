@@ -13,8 +13,9 @@ import AddCoupon from '@/views/coupon/add'
 
 import Mine from '@/views/home/mine'
 
-import StoreAdd from '@/views/home/mine/store_add'
-import StoreList from '@/views/home/mine/store_list'
+import Shop from '@/views/shop/index'
+import Store from '@/views/shop/store'
+import Employee from '@/views/shop/employee'
 
 import Member from '@/views/member/index'
 
@@ -72,14 +73,19 @@ let routes = [
     component: Member
   },
   {
-    path: '/mine/store_list/store_add',
-    name: 'store',
-    component: StoreAdd
+    path: '/cash/shop',
+    name: 'shop',
+    component: Shop
   },
   {
-    path: '/mine/store_list',
-    name: 'list',
-    component: StoreList
+    path: '/cash/shop/store/:id',
+    name: 'store',
+    component: Store
+  },
+  {
+    path: '/cash/shop/store:id/employee:id',
+    name: 'employee',
+    component: Employee
   }
 ]
 

@@ -89,7 +89,7 @@ export default {
           name: '商品管理'
         },
         {
-          path: 'cash/goods',
+          path: 'cash/shop',
           type: 'red',
           icon: 'iconfont icon-goods',
           name: '店铺管理'
