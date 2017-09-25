@@ -65,6 +65,7 @@
 
 <script>
 import Api from '@/api'
+import Store from '@/utils/store'
 export default {
   mounted() {
     Api.post('/admin/login', {
@@ -72,6 +73,11 @@ export default {
       "password": "1234fwaf",
       username: 'wfwfwa'
     })
+    Api.post('/admin/shopmgr/list')
+    .then(rs=>{
+      Store.setShopId(rs.shopList[0].id)
+    })
+    
   },
   data () {
     return {
