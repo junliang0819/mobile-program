@@ -4,7 +4,7 @@
       <router-link to="/cash/shop" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
-      <router-link to="/cash/shop/shop_add" slot="right">
+      <router-link to="/cash/shop/store_add" slot="right">
         添加
       </router-link>
     </mt-header>
