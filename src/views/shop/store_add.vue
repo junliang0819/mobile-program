@@ -1,21 +1,14 @@
 <template>
   <div>
-    <mt-header title="新增商品">
-      <router-link to="./" slot="left">
+    <mt-header title="新增门店">
+      <router-link to="." slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
       <span slot="right" @click="save">保存</span>
     </mt-header>
     <section>
-      <mt-field label="商品名称" placeholder="请输入商品名称" v-model="name"></mt-field>
-      <mt-field label="商品描述" placeholder="请输入商品描述" v-model="desc"></mt-field>
-    </section>
-    <section>
-      <mt-cell title="设置规格" is-link to="/cash/goods/add/set"></mt-cell>
-    </section>
-    <section>
-      <mt-field label="可获取点数" placeholder="请输入用户分享可获取点数" v-model="share"></mt-field>
-      <mt-field label="商品详细信息" placeholder="请输入商品详细信息" type="textarea" rows="3" v-model="info"></mt-field>
+      <mt-field label="门店名称" placeholder="请输入商品名称" v-model="displayname"></mt-field>
+      <mt-field label="门店电话" placeholder="请输入商品描述" v-model="phone"></mt-field>
     </section>
     <mt-cell>
       <div slot="title" class="border-none">
@@ -57,11 +50,8 @@ export default {
   },
   data () {
     return {
-      name: '',
-      desc: '',
-      share: '',
-      info: '',
-      isSale: true,
+      displayname: '',
+      phone: '',
       value: null,
       visible: false,
       companyName: '',
@@ -92,7 +82,7 @@ export default {
           textAlign: 'center'
         }
       ],
-      address: '北京市 市辖区 东城区',
+      address: '北京市市辖区东城区',
       addressProvince: '省',
       addressCity: '市',
       addressXian: '区'
@@ -104,7 +94,7 @@ export default {
     },
     confirm () {
       this.visible = false
-      this.address = this.addressProvince + ' ' + this.addressCity + ' ' + this.addressXian
+      this.address = this.addressProvince + this.addressCity + this.addressXian
     },
     onAddressChange (picker, values) {
       let shi = Object.keys(s[values[0]])

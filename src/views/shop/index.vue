@@ -15,7 +15,7 @@
       <i @click="chooseShop(shop.id)" class="iconfont icon-kxbshop2"></i>
     </mt-cell>
     <div class="bottom" @click="addShop">
-      添加分类
+      添加店铺
     </div>
   </div>
 </template>

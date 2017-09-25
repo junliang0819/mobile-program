@@ -17,6 +17,7 @@ import Shop from '@/views/shop/index'
 import Store from '@/views/shop/store'
 import StoreAdd from '@/views/shop/store_add'
 import Employee from '@/views/shop/employee'
+import EmployeeAdd from '@/views/shop/employee_add'
 
 import Member from '@/views/member/index'
 
@@ -89,9 +90,14 @@ let routes = [
     component: StoreAdd
   },
   {
-    path: '/cash/shop/store:id/employee:id',
+    path: '/cash/shop/employee/:id',
     name: 'employee',
     component: Employee
+  },
+  {
+    path: '/cash/shop/employee_add',
+    name: 'employee_add',
+    component: EmployeeAdd
   }
 ]
 

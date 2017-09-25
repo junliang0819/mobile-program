@@ -4,9 +4,6 @@
       <router-link to="/cash/shop" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
-      <router-link to="/cash/shop/store_add" slot="right">
-        添加
-      </router-link>
     </mt-header>
     <mt-cell v-for="store in storeList" :key="store.id">
       <div @click="chooseStore(store.id)" slot="title" class="store">
@@ -49,7 +46,7 @@
       selectStore (id) {
         console.log(id)
       },
-      chooseShop (id) {
+      chooseStore (id) {
         this.$router.push(`/cash/shop/employee/${id}`)
       }
     },

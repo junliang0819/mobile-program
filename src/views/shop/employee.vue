@@ -1,21 +1,21 @@
 <template>
   <div style="background-color: #eeeeee">
     <mt-header title="店铺列表">
-      <router-link to="." slot="left">
+      <router-link to="/cash/shop" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
-      <router-link to="/cash/shop" slot="right">
+      <router-link to="/cash/shop/employee_add" slot="right">
         添加
       </router-link>
     </mt-header>
-    <mt-cell v-for="store in storeList" :key="store.id">
-      <div v-on:click="selectStore(store.id)" slot="title" class="store">
+    <mt-cell v-for="admin in adminList" :key="admin.id">
+      <div slot="title" class="store">
         <div class="inline-block">
           <i class="iconfont icon-kxbshop2"></i>
-          <span>{{store.displayname}}</span>
+          <span>{{admin.username}}</span>
         </div>
       </div>
-      <i v-on:click="selectStore(store.id)" class="iconfont icon-kxbshop2"></i>
+      <i class="iconfont icon-kxbshop2"></i>
     </mt-cell>
   </div>
 </template>
@@ -42,18 +42,16 @@
   export default {
     data () {
       return {
-        storeList: []
+        adminList: []
       }
     },
     methods: {
-      selectStore (id) {
-        console.log(id)
-      }
+
     },
     mounted () {
-      Api.post('/admin/shopinfomgr/list').then(rs => {
+      Api.post('/admin/shopinfomgr/getadmins',{shopinfoid: 1}).then(rs => {
         if(!rs.error_response){
-          this.storeList = rs.shoplist
+          this.adminList = rs.admins
         }
       })
     }
