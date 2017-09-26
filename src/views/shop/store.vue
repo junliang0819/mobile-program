@@ -14,7 +14,7 @@
         </div>
       </div>
       <mt-button v-show="editable" size="small" type="primary" style="margin-right: 10px;" @click="change(store.id)">修改</mt-button>
-      <mt-button v-show="editable" size="small" type="danger" @click="del(index)">删除</mt-button>
+      <mt-button v-show="editable" size="small" type="danger" @click="del(store.id)">删除</mt-button>
     </mt-cell>
     <div class="bottom" @click="addStore">
       添加门店
@@ -54,8 +54,8 @@
 <script>
   import Api from '@/api'
   function getList () {
-    var _this = this
-    Api.post('/admin/shopinfomgr/list', {shopinfoid: _this.shopinfoid}).then(rs => {
+    let _this = this
+    Api.post('/admin/shopinfomgr/list', {shopid: _this.shopid}).then(rs => {
       if(!rs.error_response){
         _this.storeList = rs.shoplist
       }
@@ -65,7 +65,7 @@
     data () {
       return {
         editable: false,
-        shopinfoid: this.$route.params.shopId,
+        shopid: this.$route.params.shopId,
         storeList: []
       }
     },
@@ -74,22 +74,22 @@
 
       },
       change(id) {
-        this.$router.push(`/cash/shop/store/${this.shopinfoid}/store_edit/${id}`)
+        this.$router.push(`/cash/shop/store/${this.shopid}/store_edit/${id}`)
       },
-      del(index) {
+      del(id) {
         Api.post('/admin/shopinfomgr/del',{
-          "shopinfoid": this.storeList[index].id,
+          "shopinfoid": id,
         })
           .then(rs=>{
-            this.storeList.splice(index,1)
+            getList.apply(this, [])
           })
       },
       addStore () {
-        this.$router.push(`/cash/shop/store/${this.shopinfoid}/store_add`)
+        this.$router.push(`/cash/shop/store/${this.shopid}/store_add`)
       },
       chooseStore (id) {
         if (!this.editable) {
-          this.$router.push(`/cash/shop/store/${this.shopinfoid}/employee/${id}`)
+          this.$router.push(`/cash/shop/store/${this.shopid}/employee/${id}`)
         }
       }
     },

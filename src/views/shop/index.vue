@@ -13,8 +13,8 @@
           <span>{{shop.shopname}}</span>
         </div>
       </div>
-      <mt-button v-show="editable" size="small" type="primary" style="margin-right: 10px;" @click="change(index)">修改</mt-button>
-      <mt-button v-show="editable" size="small" type="danger" @click="del(index)">删除</mt-button>
+      <mt-button v-show="editable" size="small" type="primary" style="margin-right: 10px;" @click="change(shop.id)">修改</mt-button>
+      <mt-button v-show="editable" size="small" type="danger" @click="del(shop.id)">删除</mt-button>
     </mt-cell>
     <div class="bottom" @click="addShop" slot="right">
       添加店铺
@@ -79,24 +79,24 @@
       getList () {
         getList.apply(this, []);
       },
-      change(index) {
+      change(id) {
         MessageBox.prompt('修改店铺名','').then(({ value, action }) => {
           if(!value.trim()) return
           Api.post('/admin/shopmgr/modify',{
-            "shopid": this.shopList[index].id,
+            "shopid": id,
             "shopname": value.trim()
           })
             .then(rs=>{
-              this.shopList[index].shopname = value.trim()
+              getList.apply(this, []);
             })
         });
       },
-      del(index) {
+      del(id) {
         Api.post('/admin/shopmgr/del',{
-          "shopid": this.shopList[index].id
+          "shopid": id
         })
           .then(rs=>{
-            this.shopList.splice(index,1)
+            getList.apply(this, []);
           })
 
       },
