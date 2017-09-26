@@ -4,7 +4,9 @@
       <router-link to="." slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
-      <span slot="right" @click="editable=!editable">{{editable?'取消':'编辑'}}</span>
+      <div @click="addShop" slot="right">
+        添加
+      </div>
     </mt-header>
     <mt-cell v-for="(shop, index) in shopList" :key="shop.id">
       <div @click="chooseShop(shop.id,index)" slot="title" class="store">
@@ -13,11 +15,18 @@
           <span>{{shop.shopname}}</span>
         </div>
       </div>
-      <mt-button v-show="editable" size="small" type="primary" style="margin-right: 10px;" @click="change(index)">修改</mt-button>
-      <mt-button v-show="editable" size="small" type="danger" @click="del(index)">删除</mt-button>
+      <i @click="chooseShop(shop.id, index)" v-show="!editable" :class="shop.checkpro?'iconfont icon-gou':'iconfont icon-gou yellow'"></i>
     </mt-cell>
-    <div class="bottom" @click="addShop" slot="right">
-      添加店铺
+    <div v-show="editable" class="bottom" @click="editable=false;">
+      批量编辑
+    </div>
+    <div v-show="!editable" class="bottom">
+      <span @click="editable=true">
+        取消
+      </span>
+      <span @click="editable=true">
+        删除
+      </span>
     </div>
   </div>
 </template>
@@ -50,6 +59,15 @@
     display: inline-block;
     vertical-align: top;
   }
+  .icon-gou {
+    margin-left: 8px;
+    color: @grey;
+    display: inline-block;
+    vertical-align: top;
+    &.yellow{
+      color: @yellow;
+    }
+  }
 </style>
 <script>
   import Api from '@/api'
@@ -60,45 +78,28 @@
     Api.post('/admin/shopmgr/list').then(rs => {
       if(!rs.error_response){
         _this.shopList = rs.shoplist
+        _this.shopList.forEach(o => o.checkpro = false)
       }
     })
   }
   export default {
     data () {
       return {
-        editable: false,
+        editable: true,
         shopList: []
       }
     },
     methods: {
-      chooseShop (id) {
-        if (!this.editable) {
+      chooseShop (id, index) {
+        if (this.editable) {
           this.$router.push(`/cash/shop/store/${id}`)
+        }else {
+          console.log(this.shopList[index].checkpro)
+          this.shopList[index].checkpro = !this.shopList[index].checkpro
         }
       },
       getList () {
         getList.apply(this, []);
-      },
-      change(index) {
-        MessageBox.prompt('修改店铺名','').then(({ value, action }) => {
-          if(!value.trim()) return
-          Api.post('/admin/shopmgr/modify',{
-            "shopid": this.shopList[index].id,
-            "shopname": value.trim()
-          })
-            .then(rs=>{
-              this.shopList[index].shopname = value.trim()
-            })
-        });
-      },
-      del(index) {
-        Api.post('/admin/shopmgr/del',{
-          "shopid": this.shopList[index].id
-        })
-          .then(rs=>{
-            this.shopList.splice(index,1)
-          })
-
       },
       addShop() {
         MessageBox.prompt('新增店铺','').then(({ value, action }) => {

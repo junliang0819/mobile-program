@@ -16,6 +16,7 @@ import Mine from '@/views/home/mine'
 import Shop from '@/views/shop/index'
 import Store from '@/views/shop/store'
 import StoreAdd from '@/views/shop/store_add'
+import StoreEdit from '@/views/shop/store_edit'
 import Employee from '@/views/shop/employee'
 import EmployeeAdd from '@/views/shop/employee_add'
 
@@ -88,6 +89,11 @@ let routes = [
     path: '/cash/shop/store/:shopId/store_add',
     name: 'store_add',
     component: StoreAdd
+  },
+  {
+    path: '/cash/shop/store/:shopId/store_edit/:storeId',
+    name: 'store_edit',
+    component: StoreEdit
   },
   {
     path: '/cash/shop/store/:shopId/employee/:storeId',

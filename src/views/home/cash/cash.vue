@@ -77,7 +77,7 @@ export default {
     .then(rs=>{
       Store.setShopId(rs.shopList[0].id)
     })
-    
+
   },
   data () {
     return {
