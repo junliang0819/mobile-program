@@ -38,6 +38,7 @@
   </div>
 </template>
 <style lang="less" scoped>
+  @import '../../assets/css/colors.less';
   section {
     margin-bottom: 20px;
   }

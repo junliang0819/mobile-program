@@ -8,7 +8,8 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
+  @import '../../assets/css/colors.less';
   .store {
     padding: 5px 0 10px;
     border-top: none;

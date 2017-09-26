@@ -4,18 +4,21 @@
       <router-link to="." slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
+      <div @click="addShop" slot="right">
+        添加
+      </div>
     </mt-header>
-    <mt-cell v-for="shop in shopList" :key="shop.id">
+    <mt-cell v-if="!checkShow" v-for="shop in shopList" :key="shop.id">
       <div @click="chooseShop(shop.id)" slot="title" class="store">
         <div class="inline-block">
           <i class="iconfont icon-kxbshop2"></i>
           <span>{{shop.shopname}}</span>
         </div>
       </div>
-      <i @click="chooseShop(shop.id)" class="iconfont icon-kxbshop2"></i>
+      <i class="iconfont icon-gou"></i>
     </mt-cell>
-    <div class="bottom" @click="addShop">
-      添加店铺
+    <div class="bottom" @click="checkShow=true;">
+      批量编辑
     </div>
   </div>
 </template>
@@ -41,10 +44,16 @@
     margin-top: 5px;
     font-size: 25px;
     vertical-align: middle;
-    color: #dfc47d;
+    color: @yellow;
   }
   .inline-block {
     margin-top: 8px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .icon-gou {
+    margin-left: 8px;
+    color: @grey;
     display: inline-block;
     vertical-align: top;
   }
@@ -64,6 +73,9 @@
   export default {
     data () {
       return {
+        checkShow: false,
+        value1: [],
+        options1: [''],
         shopList: []
       }
     },

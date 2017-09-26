@@ -20,7 +20,8 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
+  @import '../../assets/css/colors.less';
   .store {
     padding: 5px 0 10px;
     border-top: none;
@@ -29,7 +30,7 @@
     margin-top: 5px;
     font-size: 25px;
     vertical-align: middle;
-    color: #dfc47d;
+    color: @yellow;
   }
   .inline-block {
     margin-top: 8px;
