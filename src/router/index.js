@@ -6,6 +6,7 @@ import Goods from '@/views/home/cash/goods'
 import GoodsType from '@/views/home/cash/goods_type'
 import GoodsDetail from '@/views/home/cash/goods_detail'
 import GoodsAdd from '@/views/home/cash/goods_add'
+import GoodsRules from '@/views/home/cash/goods_rules_set'
 import Coupon from '@/views/coupon/index'
 import AddCoupon from '@/views/coupon/add'
 
@@ -62,6 +63,11 @@ let routes = [
     path: '/cash/goods/add/:cateId',
     name: 'add',
     component: GoodsAdd
+  },
+  {
+    path: '/cash/goods/rules/set',
+    name: 'set',
+    component: GoodsRules
   },
   {
     path: '/coupon',

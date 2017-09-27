@@ -1,9 +1,7 @@
 <template>
   <div>
     <mt-header title="分类管理">
-      <router-link to="/cash/goods" slot="left">
-        <mt-button icon="back"></mt-button>
-      </router-link>
+      <mt-button icon="back" @click="$router.go(-1)" slot="left"></mt-button>
       <span slot="right" @click="edit">{{editable?'取消':'编辑'}}</span>
     </mt-header>
     <mt-cell :key="item.id" v-for="(item,index) in types" :title="item.name">

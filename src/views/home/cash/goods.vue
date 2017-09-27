@@ -1,9 +1,7 @@
 <template>
   <div>
     <mt-header title="商品管理">
-      <router-link to="/cash" slot="left">
-        <mt-button icon="back"></mt-button>
-      </router-link>
+      <mt-button icon="back" @click="$router.go(-1)" slot="left"></mt-button>
       <router-link to="/cash/goods/type" slot="right">
         分类管理
       </router-link>
@@ -27,7 +25,7 @@
               </div>
               ￥ {{good.price}}/千克
             </div>
-            <i v-show="editable" :class="good.chosen?'iconfont icon-rechargefill':'iconfont icon-recharge'"></i>
+            <i v-show="editable" :class="good.chosen?'iconfont icon-gou1 active':'iconfont icon-gou1'"></i>
           </li>
         </ul>
       </div>
@@ -72,6 +70,10 @@
     border-bottom: 1px solid @grey;
     padding: 10px;
     i {
+      color: @grey;
+      &.active {
+        color: @blue;
+      }
       float: right;
     }
   }
@@ -189,12 +191,16 @@ export default {
         this.$router.push(`/cash/goods/detail/${id}`)
         // 未提供根据商品id查询商品详情
         window.productDetail = this.types[this.currentIndex].goods[index]
+        window.productDetail.cateId = this.types[this.currentIndex].id
       }
     },
     handleLeft () {
       if (this.editable) {
         this.types = this.types.map(el => {
           el.chosen = 0
+          el.goods.forEach(el=>{
+            el.chosen = false
+          })
           return el
         })
         this.leftButton = '批量编辑'
@@ -207,14 +213,23 @@ export default {
     },
     handleRight () {
       if(this.editable){
-        let total = 0
-        this.types.forEach(el=>{
-          total += el.chosen
-        })
+        let total = this.types[this.currentIndex].chosen
         if(total === 0) return
+        let productIds = []
+        this.types[this.currentIndex].goods.forEach(el=>{
+          if(el.chosen){
+            productIds.push(el.id)
+          }
+        })
         MessageBox.confirm(`确定删除这${total}项商品？`).then(action => {
             // 请求删除商品接口
-            
+            Api.post('/admin/product/delete',{
+              "cateid": this.types[this.currentIndex].id, //商品所属的分类
+	            "productids":productIds //需要删除的商品id
+            })
+            .then(rs=>{
+              location.reload()
+            })
         });
       }else{
         this.$router.push(`/cash/goods/add/${this.types[this.currentIndex].id}`)

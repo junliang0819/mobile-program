@@ -1,10 +1,8 @@
 <template>
   <div class="content">
     <mt-header title="商品详情">
-      <router-link to="../" slot="left">
-        <mt-button icon="back"></mt-button>
-      </router-link>
-      <router-link to="/cash/goods/add/null?editable=true" slot="right">
+      <mt-button icon="back" @click="$router.go(-1)" slot="left"></mt-button>
+      <router-link :to="`/cash/goods/add/${cateId}?editable=true`" slot="right">
         编辑
       </router-link>
     </mt-header>
@@ -49,11 +47,13 @@ export default {
   mounted () {
     this.detail = copyObjProperty(window.productDetail)
     this.isSale = this.detail.marketable
+    this.cateId = this.detail.cateId
   },
   data () {
     return {
       isSale: false,
-      detail: {}
+      detail: {},
+      cateId: ''
     }
   },
   methods: {
