@@ -19,7 +19,7 @@
       </div>
       <div class="right">
         <ul>
-          <li v-for="(good,index) in types[currentIndex].goods" class="ks-clear" @click="chooseGoods(index,good.id)">
+          <li v-for="(good,index) in types[currentIndex]&&types[currentIndex].goods" class="ks-clear" @click="chooseGoods(index,good.id)">
             <img :src="good.pic" alt="" width="50" height="50">
             <div>
               <div>
@@ -66,6 +66,7 @@
   }
   .box .right {
     flex: 1;
+    overflow: auto;
   }
   .box .right li {
     border-bottom: 1px solid @grey;
@@ -105,12 +106,27 @@
 <script>
 import Api from '@/api'
 import { MessageBox } from 'mint-ui'
+import Store from '@/utils/store'
 export default {
   mounted () {
-    Api.post('/admin/product/list',{ 
-      "cateid":1, //分类id
-      "pagesize":2,//分页大小
-      "page":1 //当前页
+    Api.post('/admin/category/list',{ 
+      shopid: Store.getShopId()
+    })
+    .then(rs=>{
+      this.types = rs.cates.map(el=>{
+        return {
+          id: el.id,
+          name: el.name,
+          chosen: 0,
+          goods: [
+
+          ]
+        }
+      })
+
+    })
+    .then(rs=>{
+      this.getProducts(this.types[0].id)
     })
     
   },
@@ -122,54 +138,42 @@ export default {
       leftButton: '批量编辑',
       rightButton: '新增商品',
       types: [
-        {
-          id: 1,
-          name: '商品分类1',
-          chosen: 0,
-          goods: [
-            {
-              id: 1,
-              pic: 'http://www.cnblogs.com/skins/summerGarden/images/header.jpg',
-              name: '测试商品1', 
-              price: '10.00',
-              chosen: false
-            },
-            {
-              id: 2,
-              pic: 'http://www.cnblogs.com/skins/summerGarden/images/header.jpg',
-              name: '测试商品2',
-              price: '10.00',
-              chosen: false
-            }
-          ]
-        },
-        {
-          id: 2,
-          name: '商品分类2',
-          chosen: 0,
-          goods: [
-            {
-              id: 1,
-              pic: 'http://www.cnblogs.com/skins/summerGarden/images/header.jpg',
-              name: '测试商品3',
-              price: '10.00',
-              chosen: false
-            },
-            {
-              id: 2,
-              pic: 'http://www.cnblogs.com/skins/summerGarden/images/header.jpg',
-              name: '测试商品4',
-              price: '10.00',
-              chosen: false
-            }
-          ]
-        }
+        
       ]
     }
   },
   methods: {
+    getProducts(cateId) {
+      Api.post('/admin/product/list',{
+        "cateid": cateId, //分类id
+        "pagesize":10,//分页大小
+        "page":1 //当前页
+      })
+      .then(rs=>{
+        rs.products.forEach(el=>{
+          let priceArr = []
+          el.specs.forEach(el=>{
+            priceArr.push(el.price)
+          })
+          let price = Math.min.apply(null,priceArr)
+          let typeIndex = this.types.findIndex(el=>{
+            return el.id == cateId
+          })
+
+          this.types[typeIndex].goods.push({
+            ...el,
+            id: el.id,
+            pic: el.img,
+            name: el.name, 
+            price: price,
+            chosen: false
+          })
+        })
+      })
+    },
     changeType (id, index) {
       this.currentIndex = index
+      this.getProducts(id)
       
     },
     chooseGoods (index,id) {
@@ -183,6 +187,8 @@ export default {
         this.types[this.currentIndex].goods[index].chosen = !this.types[this.currentIndex].goods[index].chosen
       } else {
         this.$router.push(`/cash/goods/detail/${id}`)
+        // 未提供根据商品id查询商品详情
+        window.productDetail = this.types[this.currentIndex].goods[index]
       }
     },
     handleLeft () {
@@ -211,7 +217,7 @@ export default {
             
         });
       }else{
-        this.$router.push('/cash/goods/add')
+        this.$router.push(`/cash/goods/add/${this.types[this.currentIndex].id}`)
       }
     }
   }

@@ -58,7 +58,7 @@ let routes = [
     component: GoodsDetail
   },
   {
-    path: '/cash/goods/add',
+    path: '/cash/goods/add/:cateId',
     name: 'add',
     component: GoodsAdd
   },
