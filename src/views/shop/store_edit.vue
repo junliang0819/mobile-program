@@ -1,14 +1,14 @@
 <template>
   <div>
     <mt-header title="新增门店">
-      <router-link to="." slot="left">
+      <router-link to=".." slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
       <span slot="right" @click="save">保存</span>
     </mt-header>
     <section>
-      <mt-field label="门店名称" placeholder="请输入商品名称" v-model="displayname"></mt-field>
-      <mt-field label="门店电话" placeholder="请输入商品描述" v-model="phone"></mt-field>
+      <mt-field label="门店名称" placeholder="请输入商品名称" v-model="store.displayname"></mt-field>
+      <mt-field label="门店电话" placeholder="请输入商品描述" v-model="store.phone"></mt-field>
     </section>
     <mt-cell>
       <div slot="title" class="border-none">
@@ -17,7 +17,7 @@
     </mt-cell>
     <mt-cell>
       <div slot="title" class="border-none">
-        <span @click="open" class="address">{{ address }}</span>
+        <span @click="open" class="address">{{ store.address }}</span>
       </div>
     </mt-cell>
     <mt-popup v-model="visible" position="bottom" class="mint-datetime">
@@ -33,7 +33,7 @@
       </mt-picker>
     </mt-popup>
     <section>
-      <mt-field placeholder="详细地址" v-model="fulladdress"></mt-field>
+      <mt-field placeholder="详细地址" v-model="store.fulladdress"></mt-field>
     </section>
   </div>
 </template>
@@ -50,15 +50,14 @@ import { MessageBox } from 'mint-ui'
 import s from './address3.json'
 export default {
   mounted () {
+
   },
   data () {
     return {
       shopinfoid: this.$route.params.shopId,
-      displayname: '',
-      fulladdress: '',
-      phone: '',
+      storeid: this.$route.params.storeId,
+      store: {},
       visible: false,
-      companyName: '',
       addressSlots: [
         {
           flex: 1,
@@ -86,7 +85,6 @@ export default {
           textAlign: 'center'
         }
       ],
-      address: '北京市市辖区东城区',
       addressProvince: '省',
       addressCity: '市',
       addressXian: '区'
@@ -98,14 +96,14 @@ export default {
     },
     confirm () {
       this.visible = false
-      this.address = this.addressProvince + this.addressCity + this.addressXian
+      this.store.address = this.addressProvince + this.addressCity + this.addressXian
     },
     save () {
-      Api.post('/admin/shopinfomgr/create',{
-        "shopid": this.shopinfoid,
-        "displayname": this.displayname,
-        "address": this.address + ' ' + this.fulladdress,
-        "phone": this.phone
+      Api.post('/admin/shopinfomgr/modify',{
+        "shopinfoid": this.storeid,
+        "displayname": this.store.displayname,
+        "address": this.store.address + ' ' + this.store.fulladdress,
+        "phone": this.store.phone
       })
         .then(rs=>{
           if(!rs.error_response){
@@ -129,6 +127,13 @@ export default {
       setTimeout(() => {
         this.addressSlots[0].defaultIndex = 0
       }, 100)
+    })
+    Api.post('/admin/shopinfomgr/list', {shopinfoid: this.shopinfoid}).then(rs => {
+      if(!rs.error_response){
+        this.store = rs.shoplist.filter(obj => { return obj.id == this.storeid })[0]
+        this.store.address = this.store.address.split(' ')[0]
+        this.store.fulladdress = this.store.address.split(' ')[1]
+      }
     })
   }
 }

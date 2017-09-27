@@ -28,9 +28,7 @@
     },
     mounted () {
       Api.get(`/admin/shopinfomgr/getbarcode?id=${this.$route.params.shopId}&&width=300&&height=300`).then(rs => {
-        if(!rs.error_response){
-          this.adminList = rs.admins
-        }
+        this.adminList = rs.admins
       })
     }
   }
