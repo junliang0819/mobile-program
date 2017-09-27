@@ -91,7 +91,7 @@ export default {
         {
           path: 'cash/shop',
           type: 'red',
-          icon: 'iconfont icon-goods',
+          icon: 'iconfont icon-dianpu',
           name: '店铺管理'
         },
         {
