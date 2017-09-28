@@ -6,7 +6,7 @@
       </router-link>
     </mt-header>
     <div class="center">
-      <img :src="imgUrl" src="../../assets/logo.png" alt="" width="300" height="300">
+      <img :src="imgUrl" alt="" width="300" height="300">
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@
   export default {
     data () {
       return {
-        imgUrl: '../../assets/logo.png',
+        imgUrl: 'http://img.taopic.com/uploads/allimg/120727/201995-120HG1030762.jpg',
         adminList: []
       }
     },
