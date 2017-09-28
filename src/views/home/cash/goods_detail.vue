@@ -11,7 +11,10 @@
       <mt-cell title="商品描述" :value="detail.desc"></mt-cell>
     </section>
     <section>
-      <mt-cell title="商品规格" :value="detail.desc"></mt-cell>
+      <mt-cell title="商品规格"></mt-cell>
+      <template v-for="rule in detail.specs">
+        <mt-cell :title="rule.name" :value="rule.price"></mt-cell>
+      </template>
     </section>
     <section>
       <mt-cell title="分享可获取点数" :value="detail.share"></mt-cell>
@@ -41,7 +44,7 @@
 
 <script>
 import Api from '@/api'
-import { MessageBox } from 'mint-ui'
+import { MessageBox,Toast } from 'mint-ui'
 import { copyObjProperty } from '@/utils'
 export default {
   mounted () {
@@ -61,6 +64,17 @@ export default {
       
     }
     
+  },
+  watch: {
+    ['isSale'](newValue,oldValue){
+      Api.post(`/admin/product/${newValue?'onsale':'offsale'}`,{
+        "cateid": this.cateId, //商品所属的分类
+        "productids": [1,2] //需要上架的商品id
+      })
+      .then(rs=>{
+        Toast(`${newValue?'上架':'下架'}成功！`)
+      })
+    }
   }
 
 }

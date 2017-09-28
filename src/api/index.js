@@ -2,12 +2,12 @@ import axios from 'axios';
 import { Toast,Indicator } from 'mint-ui';
 axios.defaults.headers.common['Content-Type'] = 'application/json;'
 let api = {
-  get (url) {
+  get (url,data) {
     Indicator.open({
       spinnerType: 'fading-circle'
     });
     return axios.get(url,{
-      
+      params: data
     })
     .then(rs=>{
       Indicator.close()

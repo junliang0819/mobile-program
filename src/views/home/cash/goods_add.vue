@@ -73,20 +73,7 @@ export default {
       })
     }
     
-  },
-  watch: {
-    ['product.marketable'](newValue,oldValue){
-      if(!this.editable) return
-      Api.post(`/admin/product/${newValue?'onsale':'offsale'}`,{
-        "cateid": this.cateId, //商品所属的分类
-        "productids": [1,2] //需要上架的商品id
-      })
-      .then(rs=>{
-        Toast(`${newValue?'上架':'下架'}成功！`)
-      })
-    }
   }
-
 }
 </script>
 
