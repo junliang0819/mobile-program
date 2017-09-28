@@ -72,7 +72,7 @@ export default {
         "productids": [1,2] //需要上架的商品id
       })
       .then(rs=>{
-        Toast(`${newValue?'上架':'下架'}成功！`)
+        MessageBox('提示',`${newValue?'上架':'下架'}成功！`)
       })
     }
   }

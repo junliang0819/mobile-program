@@ -28,10 +28,9 @@
 
 <script>
 import Api from '@/api'
-import { MessageBox } from 'mint-ui'
+import { MessageBox,Toast } from 'mint-ui'
 import { copyObjProperty } from '@/utils'
 import Store from '@/utils/store'
-import { Toast } from 'mint-ui';
 export default {
   mounted () {
     this.editable = location.search.indexOf('editable')!= -1
@@ -59,6 +58,10 @@ export default {
   },
   methods: {
     save() {
+      if(!this.product.name){
+        Toast('请输入商品名')
+        return
+      }
       Api.post('/admin/product/add',{
         "shopid": Store.getShopId(), 
         "cateid": this.cateId,
@@ -70,6 +73,12 @@ export default {
         "detail": this.product.detail,
         "specs": this.product.specs
         }
+      })
+      .then(rs=>{
+        Toast(`${this.editable?'修改':'添加'}成功`)
+        setTimeout(()=>{
+          this.$router.push('/cash/goods')
+        },500)
       })
     }
     
