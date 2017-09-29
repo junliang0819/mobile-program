@@ -5,6 +5,11 @@
       <span slot="right" @click="save">保存</span>
     </mt-header>
     <section>
+      <div class="img" @click="$router.push('/image/type')">
+        <img :src="product.img" alt="">
+      </div>
+    </section>
+    <section>
       <mt-field label="商品名称" placeholder="请输入商品名称" v-model="product.name"></mt-field>
       <mt-field label="商品描述" placeholder="请输入商品描述" v-model="product.desc"></mt-field>
     </section>
@@ -23,6 +28,13 @@
 <style lang="less" scoped>
   section {
     margin-bottom: 20px;
+    .img {
+      height: 150px;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 </style>
 
@@ -45,6 +57,7 @@ export default {
         this.product.specs = window.productRules
       }
     }
+    this.product.img = window.chosenUrl
   },
   data () {
     return {

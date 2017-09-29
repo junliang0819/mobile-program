@@ -7,6 +7,9 @@
       </router-link>
     </mt-header>
     <section>
+      <img :src="detail.img" alt="">
+    </section>
+    <section>
       <mt-cell title="商品名称" :value="detail.name"></mt-cell>
       <mt-cell title="商品描述" :value="detail.desc"></mt-cell>
     </section>
@@ -25,13 +28,17 @@
     </mt-cell>
   </div>
 </template>
-<style scoped>
+<style lang="less" scoped>
   .content {
     background: #f4f5f7;
   }
   section {
     background: #fff;
     margin-bottom: 20px;
+    img {
+      width: 100%;
+      height: 150px;
+    }
   }
   li {
     padding: 5px;

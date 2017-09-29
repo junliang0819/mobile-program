@@ -192,6 +192,7 @@ export default {
         // 未提供根据商品id查询商品详情
         window.productDetail = this.types[this.currentIndex].goods[index]
         window.productDetail.cateId = this.types[this.currentIndex].id
+        window.chosenUrl = window.productDetail.img
       }
     },
     handleLeft () {
